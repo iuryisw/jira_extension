@@ -5,6 +5,31 @@
   let sprintDetailsElement = null;
   let observer = null;
   let showNotifications = false; // Default to false
+  let sprintCache = {}; // Cache sprint data per board ID
+
+  // Extract board ID from URL
+  function getBoardId() {
+    const match = window.location.pathname.match(/\/boards\/(\d+)/);
+    return match ? match[1] : null;
+  }
+
+  // Check if current page is the active sprint board
+  function isActiveSprintPage() {
+    const url = window.location.href;
+    const boardId = getBoardId();
+    
+    if (!boardId) return false;
+    
+    // Active sprint page pattern: ends with /boards/{id} or /boards/{id}?params
+    // NOT backlog, calendar, timeline, reports, etc.
+    const isActiveSprint = url.match(new RegExp(`/boards/${boardId}(?:\\?|$)`)) && 
+                          !url.includes('/backlog') &&
+                          !url.includes('/calendar') &&
+                          !url.includes('/timeline') &&
+                          !url.includes('/reports');
+    
+    return isActiveSprint;
+  }
 
   // Show status notification
   function showStatus(message, type = 'info') {
@@ -123,7 +148,8 @@
     // Remove existing display if present
     const existing = document.getElementById('jira-sprint-display-extension');
     if (existing) {
-      existing.remove();
+      // Display already exists, don't re-insert
+      return;
     }
     
     // Look for the right side controls container (css-u345ti class)
@@ -142,19 +168,28 @@
 
   // Click the sprint details button and extract info
   function fetchSprintDetails(button = null) {
+    const boardId = getBoardId();
+    
+    // Check if we have cached data for this board
+    if (boardId && sprintCache[boardId]) {
+      showStatus('Using cached sprint data for board ' + boardId, 'info');
+      insertSprintDisplay(sprintCache[boardId]);
+      return;
+    }
+    
     const sprintButton = button || document.querySelector('[data-testid="software-board.header.sprint-controls.sprint-details.trigger-button.icon-button"]');
     
     if (!sprintButton) {
-      showStatus('Sprint button parameter missing', 'error');
+      showStatus('Sprint button not found', 'error');
       return;
     }
 
-    showStatus('Clicking sprint button...', 'info');
+    showStatus('Fetching fresh sprint data...', 'info');
     
     // Click to open popup
     sprintButton.click();
 
-    // Wait longer for popup to appear and try multiple selectors
+    // Wait for popup to appear
     setTimeout(() => {
       showStatus('Looking for popup...', 'info');
       
@@ -175,9 +210,10 @@
         showStatus('Popup found! Extracting data...', 'success');
         const sprintInfo = extractSprintInfo(popup);
         
-        if (sprintInfo) {
+        if (sprintInfo && boardId) {
+          sprintCache[boardId] = sprintInfo; // Cache by board ID
           insertSprintDisplay(sprintInfo);
-          showStatus('Sprint details loaded!', 'success');
+          showStatus('Sprint details cached for board ' + boardId, 'success');
           setupObserver();
         } else {
           showStatus('Could not extract sprint info', 'error');
@@ -186,43 +222,41 @@
         // Close the popup
         setTimeout(() => {
           document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape' }));
-          // Or try clicking the button again to toggle it closed
           sprintButton.click();
         }, 100);
       } else {
-        showStatus('Popup not found - checking page structure', 'error');
-        // Log what dialogs we can find
-        const allDialogs = document.querySelectorAll('[role="dialog"]');
-        showStatus(`Found ${allDialogs.length} dialogs on page`, 'info');
+        showStatus('Popup not found', 'error');
       }
-    }, 1200); // Increased wait time
+    }, 1200);
   }
 
-  // Monitor for DOM changes (navigation in JIRA)
+  // Monitor for DOM changes (navigation in JIRA) - DISABLED
   function setupObserver() {
+    // Observer disabled - we only rely on URL changes and initial load
+    // This prevents re-triggering on filter changes
     if (observer) {
       observer.disconnect();
+      observer = null;
     }
-
-    observer = new MutationObserver((mutations) => {
-      // Check if we're on a board page and sprint button exists
-      const sprintButton = document.querySelector('[data-testid="software-board.header.sprint-controls.sprint-details.trigger-button.icon-button"]');
-      const existingDisplay = document.getElementById('jira-sprint-display-extension');
-      
-      if (sprintButton && !existingDisplay) {
-        fetchSprintDetails();
-      }
-    });
-
-    observer.observe(document.body, {
-      childList: true,
-      subtree: true
-    });
   }
 
   // Initialize the extension
   function init() {
-    showStatus('Initializing...', 'info');
+    // Check if we're on an active sprint page
+    if (!isActiveSprintPage()) {
+      showStatus('Not on active sprint page, skipping', 'info');
+      return;
+    }
+    
+    const boardId = getBoardId();
+    showStatus('Initializing for board ' + boardId, 'info');
+    
+    // Check if display already exists (avoid duplicates)
+    const existingDisplay = document.getElementById('jira-sprint-display-extension');
+    if (existingDisplay) {
+      showStatus('Display already exists, skipping', 'info');
+      return;
+    }
     
     // First, wait longer for the page to fully load
     setTimeout(() => {
@@ -239,7 +273,7 @@
     }, 2000); // Wait 2 seconds for JIRA to fully load
   }
 
-  // Start when DOM is ready
+  // Start when DOM is ready - ONE TIME ONLY
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', init);
   } else {
@@ -266,14 +300,27 @@
     }
   }, 1000);
 
-  // Also re-initialize on URL changes (JIRA is a SPA)
+  // Watch for URL changes ONLY (not DOM changes)
   let lastUrl = location.href;
-  new MutationObserver(() => {
-    const url = location.href;
-    if (url !== lastUrl) {
-      lastUrl = url;
-      setTimeout(init, 1000);
+  let lastPathname = location.pathname;
+  
+  // Use setInterval instead of MutationObserver for URL checking
+  setInterval(() => {
+    const currentUrl = location.href;
+    const currentPathname = location.pathname;
+    
+    // Only act if the pathname changed (actual navigation, not just query params)
+    if (currentPathname !== lastPathname) {
+      showStatus('Page navigation detected', 'info');
+      lastUrl = currentUrl;
+      lastPathname = currentPathname;
+      
+      // Small delay then re-initialize
+      setTimeout(init, 2000);
+    } else {
+      // URL params changed but not pathname (filtering)
+      lastUrl = currentUrl;
     }
-  }).observe(document, { subtree: true, childList: true });
+  }, 1000); // Check every second
 
 })();
