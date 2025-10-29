@@ -1,6 +1,6 @@
 {
   "manifest_version": 3,
-  "name": "JIRA Sprint Details Display",
+  "name": "Sprint Details for JIRA",
   "version": "1.0.0",
   "description": "Automatically displays Sprint Details near Quick Filters in JIRA",
   "permissions": [
@@ -27,6 +27,6 @@
   },
   "action": {
     "default_popup": "popup/popup.html",
-    "default_title": "JIRA Sprint Details Settings"
+    "default_title": "Sprint Details for JIRA Settings"
   }
 }
