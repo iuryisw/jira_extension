@@ -129,7 +129,7 @@ This extension:
 - ✅ Runs entirely in your browser
 - ✅ Does NOT send data to external servers
 - ✅ Only accesses JIRA pages
-- ✅ Does NOT store or transmit sprint information (only saves user preferences locally)
+- ✅ Does NOT store or transmit sprint information (only saves notification preferences locally)
 
 ## 📝 Version History
 
