@@ -258,7 +258,15 @@
       return;
     }
     
-    // First, wait longer for the page to fully load
+    // If we have cached data for this board, use it immediately
+    if (boardId && sprintCache[boardId]) {
+      showStatus('Using cached data immediately', 'info');
+      insertSprintDisplay(sprintCache[boardId]);
+      return;
+    }
+    
+    // Otherwise, fetch fresh data
+    // First, wait for the page to fully load
     setTimeout(() => {
       showStatus('Searching for sprint button...', 'info');
       
@@ -303,22 +311,29 @@
   // Watch for URL changes ONLY (not DOM changes)
   let lastUrl = location.href;
   let lastPathname = location.pathname;
+  let checkCount = 0;
   
   // Use setInterval instead of MutationObserver for URL checking
   setInterval(() => {
     const currentUrl = location.href;
     const currentPathname = location.pathname;
     
+    checkCount++;
+    
     // Only act if the pathname changed (actual navigation, not just query params)
     if (currentPathname !== lastPathname) {
-      showStatus('Page navigation detected', 'info');
+      showStatus(`Navigation detected (check #${checkCount})`, 'info');
       lastUrl = currentUrl;
       lastPathname = currentPathname;
       
       // Small delay then re-initialize
-      setTimeout(init, 2000);
-    } else {
+      setTimeout(() => {
+        showStatus('Re-initializing after navigation...', 'info');
+        init();
+      }, 2000);
+    } else if (currentUrl !== lastUrl) {
       // URL params changed but not pathname (filtering)
+      showStatus(`Filter detected (check #${checkCount}), ignoring`, 'info');
       lastUrl = currentUrl;
     }
   }, 1000); // Check every second
