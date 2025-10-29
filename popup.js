@@ -21,12 +21,15 @@ document.addEventListener('DOMContentLoaded', () => {
         saveStatus.classList.remove('show');
       }, 2000);
       
-      // Notify content script of the change
+      // Try to notify content script of the change (with error handling)
       chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
         if (tabs[0]) {
           chrome.tabs.sendMessage(tabs[0].id, {
             action: 'updateSettings',
             showNotifications: enabled
+          }).catch(() => {
+            // Ignore errors - content script might not be on a JIRA page
+            console.log('Could not send message to content script (page might not be JIRA)');
           });
         }
       });

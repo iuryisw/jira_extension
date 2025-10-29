@@ -312,13 +312,21 @@
   let lastUrl = location.href;
   let lastPathname = location.pathname;
   let checkCount = 0;
+  let lastCheckTime = Date.now();
   
   // Use setInterval instead of MutationObserver for URL checking
-  setInterval(() => {
+  const urlWatcher = setInterval(() => {
     const currentUrl = location.href;
     const currentPathname = location.pathname;
+    const now = Date.now();
     
     checkCount++;
+    
+    // Debug: show that interval is still running (only every 60 checks = ~1 minute)
+    if (checkCount % 60 === 0) {
+      showStatus(`Watcher alive - check #${checkCount} (${Math.round((now - lastCheckTime) / 1000)}s since last check)`, 'info');
+    }
+    lastCheckTime = now;
     
     // Only act if the pathname changed (actual navigation, not just query params)
     if (currentPathname !== lastPathname) {
