@@ -98,7 +98,7 @@ You can customize the appearance by editing `styles.css`:
 - Change colors in the `background: linear-gradient(...)` property
 - Adjust spacing with `padding` and `margin` values
 - Modify font sizes in various classes
-- Customize dark mode theme
+- Customize dark mode theme (note: there are duplicate dark mode sections at lines 57-66 and 100-109 in the CSS file)
 
 ## 🐛 Troubleshooting
 
@@ -129,7 +129,7 @@ This extension:
 - ✅ Runs entirely in your browser
 - ✅ Does NOT send data to external servers
 - ✅ Only accesses JIRA pages
-- ✅ Does NOT store or transmit any sprint information
+- ✅ Does NOT store or transmit sprint information (only saves user preferences locally)
 
 ## 📝 Version History
 
