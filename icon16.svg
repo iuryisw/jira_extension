@@ -1,0 +1,32 @@
+<svg width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background circle -->
+  <circle cx="8" cy="8" r="8" fill="#0052CC"/>
+  
+  <!-- Letter J -->
+  <path d="M 9.5 4 L 9.5 9.5 Q 9.5 11 8 11 Q 6.5 11 6.5 9.5 L 7.5 9.5 Q 7.5 10 8 10 Q 8.5 10 8.5 9.5 L 8.5 4 Z" fill="white"/>
+  
+  <!-- Firework sparks -->
+  <!-- Top spark -->
+  <circle cx="11" cy="3" r="0.6" fill="#FFD700"/>
+  <circle cx="11.5" cy="2.5" r="0.4" fill="#FFA500"/>
+  
+  <!-- Top right spark -->
+  <circle cx="12.5" cy="5" r="0.5" fill="#FF6B6B"/>
+  <circle cx="13" cy="4.5" r="0.3" fill="#FF4757"/>
+  
+  <!-- Right spark -->
+  <circle cx="13" cy="7.5" r="0.6" fill="#4ECDC4"/>
+  <circle cx="13.5" cy="7" r="0.4" fill="#45B7AF"/>
+  
+  <!-- Bottom right spark -->
+  <circle cx="11.5" cy="10" r="0.5" fill="#A8E6CF"/>
+  <circle cx="12" cy="10.5" r="0.3" fill="#7FD1AE"/>
+  
+  <!-- Left spark -->
+  <circle cx="4" cy="6" r="0.5" fill="#FFD93D"/>
+  <circle cx="3.5" cy="5.5" r="0.3" fill="#FFC107"/>
+  
+  <!-- Top left spark -->
+  <circle cx="5" cy="3.5" r="0.6" fill="#FF9FF3"/>
+  <circle cx="4.5" cy="3" r="0.4" fill="#F368E0"/>
+</svg>

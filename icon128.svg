@@ -1,0 +1,128 @@
+<svg width="128" height="128" viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background circle with gradient -->
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0052CC;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#0065FF;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0747A6;stop-opacity:1" />
+    </linearGradient>
+    <filter id="glowEffect">
+      <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <radialGradient id="sparkGrad1">
+      <stop offset="0%" style="stop-color:#FFD700;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#FFA500;stop-opacity:0.6" />
+    </radialGradient>
+    <radialGradient id="sparkGrad2">
+      <stop offset="0%" style="stop-color:#FF6B6B;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#FF4757;stop-opacity:0.6" />
+    </radialGradient>
+    <radialGradient id="sparkGrad3">
+      <stop offset="0%" style="stop-color:#4ECDC4;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#45B7AF;stop-opacity:0.6" />
+    </radialGradient>
+  </defs>
+  
+  <!-- Main background circle -->
+  <circle cx="64" cy="64" r="64" fill="url(#bgGradient)"/>
+  
+  <!-- Letter J with glow effect -->
+  <path d="M 75 32 L 75 75 Q 75 88 64 88 Q 53 88 53 75 L 60 75 Q 60 81 64 81 Q 68 81 68 75 L 68 32 Z" 
+        fill="white" filter="url(#glowEffect)" stroke="rgba(255,255,255,0.3)" stroke-width="1"/>
+  
+  <!-- Top firework cluster -->
+  <g opacity="0.95">
+    <circle cx="88" cy="24" r="5" fill="url(#sparkGrad1)"/>
+    <circle cx="92" cy="20" r="3.5" fill="#FFD700"/>
+    <circle cx="94" cy="26" r="2.5" fill="#FFA500"/>
+    <circle cx="85" cy="20" r="2" fill="#FFD700" opacity="0.8"/>
+    <circle cx="90" cy="28" r="2" fill="#FFC107" opacity="0.8"/>
+  </g>
+  
+  <!-- Top right firework cluster -->
+  <g opacity="0.95">
+    <circle cx="98" cy="40" r="4.5" fill="url(#sparkGrad2)"/>
+    <circle cx="104" cy="36" r="3" fill="#FF6B6B"/>
+    <circle cx="102" cy="44" r="2.5" fill="#FF4757"/>
+    <circle cx="100" cy="32" r="2" fill="#FF9AA2" opacity="0.8"/>
+    <circle cx="106" cy="42" r="2" fill="#FF6B6B" opacity="0.8"/>
+  </g>
+  
+  <!-- Right firework cluster -->
+  <g opacity="0.95">
+    <circle cx="104" cy="60" r="5" fill="url(#sparkGrad3)"/>
+    <circle cx="108" cy="56" r="3.5" fill="#4ECDC4"/>
+    <circle cx="110" cy="64" r="2.5" fill="#45B7AF"/>
+    <circle cx="106" cy="52" r="2" fill="#7FDBDA" opacity="0.8"/>
+    <circle cx="112" cy="60" r="2" fill="#4ECDC4" opacity="0.8"/>
+  </g>
+  
+  <!-- Bottom right firework cluster -->
+  <g opacity="0.95">
+    <circle cx="93" cy="80" r="4.5" fill="#A8E6CF"/>
+    <circle cx="96" cy="84" r="3" fill="#7FD1AE"/>
+    <circle cx="98" cy="77" r="2.5" fill="#A8E6CF"/>
+    <circle cx="90" cy="84" r="2" fill="#C7F0DB" opacity="0.8"/>
+    <circle cx="100" cy="82" r="2" fill="#7FD1AE" opacity="0.8"/>
+  </g>
+  
+  <!-- Bottom firework cluster -->
+  <g opacity="0.95">
+    <circle cx="72" cy="99" r="4.5" fill="#B4A7D6"/>
+    <circle cx="67" cy="103" r="3" fill="#9B8DC2"/>
+    <circle cx="76" cy="103" r="2.5" fill="#B4A7D6"/>
+    <circle cx="70" cy="96" r="2" fill="#C5B9E0" opacity="0.8"/>
+    <circle cx="75" cy="106" r="2" fill="#9B8DC2" opacity="0.8"/>
+  </g>
+  
+  <!-- Bottom left firework cluster -->
+  <g opacity="0.95">
+    <circle cx="35" cy="85" r="4.5" fill="#6BCF7F"/>
+    <circle cx="31" cy="89" r="3" fill="#4CAF50"/>
+    <circle cx="38" cy="88" r="2.5" fill="#6BCF7F"/>
+    <circle cx="33" cy="82" r="2" fill="#8FDB9C" opacity="0.8"/>
+    <circle cx="40" cy="90" r="2" fill="#4CAF50" opacity="0.8"/>
+  </g>
+  
+  <!-- Left firework cluster -->
+  <g opacity="0.95">
+    <circle cx="32" cy="48" r="4.5" fill="#FFD93D"/>
+    <circle cx="28" cy="44" r="3" fill="#FFC107"/>
+    <circle cx="30" cy="52" r="2.5" fill="#FFD93D"/>
+    <circle cx="26" cy="48" r="2" fill="#FFE066" opacity="0.8"/>
+    <circle cx="34" cy="52" r="2" fill="#FFC107" opacity="0.8"/>
+  </g>
+  
+  <!-- Top left firework cluster -->
+  <g opacity="0.95">
+    <circle cx="40" cy="28" r="5" fill="#FF9FF3"/>
+    <circle cx="36" cy="24" r="3.5" fill="#F368E0"/>
+    <circle cx="43" cy="23" r="2.5" fill="#FF9FF3"/>
+    <circle cx="38" cy="31" r="2" fill="#FFBEFD" opacity="0.8"/>
+    <circle cx="44" cy="28" r="2" fill="#F368E0" opacity="0.8"/>
+  </g>
+  
+  <!-- Additional accent sparks for more festivity -->
+  <g opacity="0.7">
+    <circle cx="48" cy="16" r="2" fill="#FFF"/>
+    <circle cx="110" cy="75" r="2" fill="#FFF"/>
+    <circle cx="21" cy="64" r="2" fill="#FFF"/>
+    <circle cx="53" cy="107" r="2" fill="#FFF"/>
+    <circle cx="95" cy="20" r="1.5" fill="#FFF"/>
+    <circle cx="18" cy="40" r="1.5" fill="#FFF"/>
+    <circle cx="108" cy="95" r="1.5" fill="#FFF"/>
+    <circle cx="80" cy="15" r="1.5" fill="#FFF"/>
+  </g>
+  
+  <!-- Trail lines for some sparks (firework trails) -->
+  <g opacity="0.4" stroke-linecap="round">
+    <line x1="88" y1="24" x2="85" y2="30" stroke="#FFD700" stroke-width="1.5"/>
+    <line x1="98" y1="40" x2="95" y2="46" stroke="#FF6B6B" stroke-width="1.5"/>
+    <line x1="104" y1="60" x2="101" y2="66" stroke="#4ECDC4" stroke-width="1.5"/>
+    <line x1="40" y1="28" x2="43" y2="34" stroke="#FF9FF3" stroke-width="1.5"/>
+  </g>
+</svg>

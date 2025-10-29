@@ -1,0 +1,125 @@
+/* JIRA Sprint Details Display Extension Styles */
+
+#jira-sprint-display-extension {
+  background: linear-gradient(135deg, #0052CC 0%, #0747A6 100%);
+  color: white;
+  border-radius: 3px;
+  padding: 0 8px;
+  margin-right: 6px;
+  box-shadow: 0 1px 4px rgba(0, 82, 204, 0.2);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  height: 32px;
+  gap: 6px;
+}
+
+#jira-sprint-display-extension:hover {
+  box-shadow: 0 2px 6px rgba(0, 82, 204, 0.3);
+  transform: translateY(-1px);
+}
+
+.sprint-display-content {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  line-height: 1;
+}
+
+.sprint-time-left {
+  font-weight: 600;
+  font-size: 12px;
+  padding: 2px 6px;
+  background: rgba(255, 255, 255, 0.25);
+  border-radius: 2px;
+  white-space: nowrap;
+}
+
+.sprint-dates {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  opacity: 0.95;
+  font-size: 11px;
+  white-space: nowrap;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  #jira-sprint-display-extension {
+    font-size: 11px;
+  }
+}
+
+/* Dark theme support */
+@media (prefers-color-scheme: dark) {
+  #jira-sprint-display-extension {
+    background: linear-gradient(135deg, #1B2C4A 0%, #0E1A2F 100%);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+  }
+  
+  #jira-sprint-display-extension:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+  }
+}
+
+/* Animation */
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+#jira-sprint-display-extension {
+  animation: slideIn 0.3s ease-out;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  #jira-sprint-display-extension {
+    padding: 10px 12px;
+  }
+  
+  .sprint-name {
+    font-size: 14px;
+  }
+  
+  .sprint-display-body {
+    font-size: 12px;
+  }
+}
+
+/* Dark theme support */
+@media (prefers-color-scheme: dark) {
+  #jira-sprint-display-extension {
+    background: linear-gradient(135deg, #1B2C4A 0%, #0E1A2F 100%);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+  }
+  
+  #jira-sprint-display-extension:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+  }
+}
+
+/* Animation */
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+#jira-sprint-display-extension {
+  animation: slideIn 0.3s ease-out;
+}
